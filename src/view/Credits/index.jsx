@@ -38,7 +38,7 @@ const Credits = () => {
 
   const yarden = {
     name: "Yarden Shalom",
-    gitHub: "",
+    gitHub: "https://github.com/JordanSh",
     linkdin: "https://www.linkedin.com/in/yarden-shalom-a85a70197/",
     email: "yardeninho@gmail.com",
     phone: "054-9100290"
