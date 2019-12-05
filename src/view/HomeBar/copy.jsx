@@ -1,0 +1,178 @@
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { flexbox } from "../../styles/mixins";
+import { GlobalContext } from "../../state/GlobalContext";
+import { FiLogOut } from "react-icons/fi";
+import { FaUserAstronaut, FaRegHandPeace } from "react-icons/fa";
+
+const HomeBar = () => {
+  const { loggedIn, loggedUser, setLoggedUser, dropDownIsOpen, setDropDownIsOpen } = useContext(GlobalContext);
+
+  const logout = () => {
+    setDropDownIsOpen(false);
+    setLoggedUser({});
+    window.location.href = "/credits";
+  };
+
+  return (
+    <HomeBarContainer>
+      <StyledLinkLogo to="/feed">
+        <Logo>Robogram</Logo>
+      </StyledLinkLogo>
+      <MenuBox loggedIn={loggedIn}>
+        <AvatarDisplay src={loggedUser.avatar} onClick={() => setDropDownIsOpen(!dropDownIsOpen)} />
+        <DropDown dropDownIsOpen={dropDownIsOpen}>
+          <ProfileDisplay>{`Hi ${loggedUser.userName}!`}</ProfileDisplay>
+          <StyledLink to="/profile" onClick={() => setDropDownIsOpen(false)}>
+            <ProfileButton>
+              <TextSpan>Your Profile</TextSpan> <FaUserAstronaut />
+            </ProfileButton>
+          </StyledLink>
+          <StyledLink to="/credits" onClick={() => setDropDownIsOpen(false)}>
+            <CreditsButton>
+              <TextSpan>Credits</TextSpan> <FaRegHandPeace />
+            </CreditsButton>
+          </StyledLink>
+
+          <LogOutButton
+            onClick={() => {
+              logout();
+            }}>
+            <TextSpan>Log Out </TextSpan>
+            <FiLogOut />
+          </LogOutButton>
+        </DropDown>
+      </MenuBox>
+    </HomeBarContainer>
+  );
+};
+
+export default HomeBar;
+
+const HomeBarContainer = styled.div`
+  ${flexbox()}
+  position: sticky;
+  top: 0;
+  background-color: white;
+  text-align: center;
+  /* height: 60px; */
+  width: 100%;
+  border-bottom: 1px solid lightslategrey;
+  z-index: 5;
+`;
+
+const Logo = styled.div`
+  font-family: "Pacifico", cursive;
+  ${flexbox()};
+  font-size: 34px;
+  padding: 8px;
+  flex-basis: 80%;
+`;
+
+const MenuBox = styled.div`
+  display: ${({ loggedIn }) => (loggedIn ? "block" : "none")};
+`;
+
+const AvatarDisplay = styled.img`
+  position: absolute;
+  top: 6px;
+  right: 13px;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #313131;
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const DropDown = styled.ul`
+  ${flexbox({ jc: "flex-between" })};
+  flex-wrap: wrap;
+  display: ${({ dropDownIsOpen }) => (dropDownIsOpen ? "block" : "none")};
+  position: absolute;
+  background: white;
+  border: 2px solid #313131;
+  box-shadow: 2px 5px 5px black;
+  width: 50%;
+  height: 400%;
+  border-radius: 4px;
+  right: 14px;
+  top: 60px;
+  z-index: 999;
+
+  &:before {
+    content: "";
+    position: absolute;
+    border-color: #313131 transparent;
+    border-style: solid;
+    border-width: 0px 6px 10px 6px;
+
+    height: 0px;
+    width: 0px;
+    top: -10px;
+    /* top: -7px; */
+    right: 10px;
+  }
+`;
+
+const TextSpan = styled.div`
+  flex-basis: 80%;
+`;
+
+const ProfileDisplay = styled.li`
+  ${flexbox()}
+  font-weight: bold;
+  height: 25%;
+  opacity: 0.6;
+  flex-basis: 100%;
+  background: #313131;
+  color: white;
+`;
+
+const StyledLink = styled(Link)`
+  ${flexbox()}
+  color: black;
+  text-decoration: none;
+  text-align: left;
+  height: 25%;
+  flex-basis: 100%;
+  opacity: 0.6;
+  transition: 0.2s ease-out;
+  color: #212121;
+
+  &:hover {
+    opacity: 0.9;
+    background: #cee9ea;
+    color: #121212;
+  }
+`;
+
+const ProfileButton = styled.li`
+  ${flexbox()}
+  /* border-bottom: 1px grey solid; */
+  text-align: left;
+  height: 25%;
+  flex-basis: 100%;
+`;
+
+const CreditsButton = styled(ProfileButton)``;
+const LogOutButton = styled(ProfileButton)`
+  color: lightcoral;
+  opacity: 0.9;
+  transition: 0.2s ease-out;
+
+  &:hover {
+    opacity: 1;
+    background: #defeff;
+    color: crimson;
+    cursor: pointer;
+  }
+`;
+
+const StyledLinkLogo = styled(Link)`
+  color: black;
+  text-decoration: none;
+`;
