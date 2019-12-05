@@ -7,7 +7,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import Techs from "./Techs";
-// add git link
+// add git
 
 const Credits = () => {
   const createMaker = ({ name, gitHub, linkdin, email, phone }) => {
