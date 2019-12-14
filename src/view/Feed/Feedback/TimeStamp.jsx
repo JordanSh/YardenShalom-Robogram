@@ -17,7 +17,7 @@ const TimeStamp = ({ timeStamp }) => {
     } else if (daysDifference <= 31) {
       return `${daysDifference} days ago`;
     } else {
-      const convertedPostTime = new Date(postTimeStamp);
+      const convertedPostTime = new Date(Number(postTimeStamp));
       // console.log(convertedPostTime);
       const dayMonthString = String(convertedPostTime).slice(4, 10);
       const yearString = String(convertedPostTime).slice(11, 15);
