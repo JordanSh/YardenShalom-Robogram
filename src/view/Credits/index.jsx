@@ -63,7 +63,7 @@ const Credits = () => {
           {createMaker({ ...yarden })}
           {createMaker({ ...oren })}
         </MakersBox>
-        <StyledLoginLink to="/login">Go To Site</StyledLoginLink>
+        <StyledLoginLink to="/feed">Go To Site</StyledLoginLink>
 
         <Techs />
 
