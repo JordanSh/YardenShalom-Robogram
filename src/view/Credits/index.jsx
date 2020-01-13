@@ -10,7 +10,7 @@ import Techs from "./Techs";
 // add git
 
 const Credits = () => {
-  const createMaker = ({ name, gitHub, linkdin, email, phone }) => {
+  const createMaker = ({ name, gitHub, linkedin, email, phone }) => {
     return (
       <Maker>
         {name}
@@ -20,7 +20,7 @@ const Credits = () => {
               <GoMarkGithub />
             </LinkHref>
 
-            <LinkHref href={linkdin} target="_blank">
+            <LinkHref href={linkedin} target="_blank">
               <FaLinkedin />
             </LinkHref>
 
@@ -40,7 +40,7 @@ const Credits = () => {
   const yarden = {
     name: "Yarden Shalom",
     gitHub: "https://github.com/JordanSh",
-    linkdin: "https://www.linkedin.com/in/yarden-shalom-a85a70197/",
+    linkedin: "https://www.linkedin.com/in/yarden-shalom-a85a70197/",
     email: "yardeninho@gmail.com",
     phone: "054-9100290"
   };
@@ -48,7 +48,7 @@ const Credits = () => {
   const oren = {
     name: "Oren Kesler",
     gitHub: "",
-    linkdin: "https://www.linkedin.com/in/oren-kesler-934245144",
+    linkedin: "https://www.linkedin.com/in/oren-kesler-934245144",
     email: "orenkes12@gmail.com",
     phone: "054-6308658"
   };
