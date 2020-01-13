@@ -84,6 +84,8 @@ const HomeBarSeparator = styled.div`
   border-bottom: 1px solid lightslategrey;
   display: flex;
   position: fixed;
+  background-color: white;
+
   top: 0;
   z-index: 5;
 `;
