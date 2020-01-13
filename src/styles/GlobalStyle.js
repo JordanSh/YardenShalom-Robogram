@@ -59,7 +59,7 @@ const GlobalStyleComponent = createGlobalStyle`
     }
     body {
       font-size: 1.6rem;
-      background: papayawhip;
+      background: snow;
       font-family: Arial, Helvetica, sans-serif ;
     }
     * {

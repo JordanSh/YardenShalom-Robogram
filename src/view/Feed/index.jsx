@@ -61,6 +61,9 @@ const MainWrapper = styled.div`
   background-color: white;
   overflow-x: hidden;
   scroll-behavior: smooth;
+
+  max-width: 450px;
+  margin: auto;
 `;
 
 const SpinnerBox = styled.div`

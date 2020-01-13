@@ -7,7 +7,13 @@ import { FiLogOut, FiHome } from "react-icons/fi";
 import { FaUserAstronaut, FaRegHandPeace } from "react-icons/fa";
 
 const HomeBar = () => {
-  const { loggedIn, loggedUser, setLoggedUser, dropDownIsOpen, setDropDownIsOpen } = useContext(GlobalContext);
+  const {
+    loggedIn,
+    loggedUser,
+    setLoggedUser,
+    dropDownIsOpen,
+    setDropDownIsOpen
+  } = useContext(GlobalContext);
 
   const logout = () => {
     setDropDownIsOpen(false);
@@ -16,66 +22,81 @@ const HomeBar = () => {
   };
 
   return (
-    <HomeBarContainer loggedIn={loggedIn}>
-      <StyledLinkFeed
-        to="/feed"
-        onClick={() => {
-          setDropDownIsOpen(false);
-          document.documentElement.scrollTop = 0;
-        }}
-        loggedIn={loggedIn}>
-        <BackToFeedButton>
-          <FiHome />
-        </BackToFeedButton>
-      </StyledLinkFeed>
-      <StyledLinkLogo to="/feed">
-        <Logo>
-          Robogram
-          <LogoImage src="bot-300x300.png" />
-        </Logo>
-      </StyledLinkLogo>
-      <MenuBox loggedIn={loggedIn}>
-        <AvatarDisplay src={loggedUser.avatar} onClick={() => setDropDownIsOpen(!dropDownIsOpen)} />
-        <DropDown dropDownIsOpen={dropDownIsOpen}>
-          <ProfileDisplay>{`Hi ${loggedUser.userName}!`}</ProfileDisplay>
-          <StyledLink to="/profile" onClick={() => setDropDownIsOpen(false)}>
-            <ProfileButton>
-              <TextSpan>Your Profile</TextSpan> <FaUserAstronaut />
-            </ProfileButton>
-          </StyledLink>
-          <StyledLink to="/credits" onClick={() => setDropDownIsOpen(false)}>
-            <CreditsButton>
-              <TextSpan>Credits</TextSpan> <FaRegHandPeace />
-            </CreditsButton>
-          </StyledLink>
+    <HomeBarSeparator>
+      <HomeBarContainer loggedIn={loggedIn}>
+        <StyledLinkFeed
+          to="/feed"
+          onClick={() => {
+            setDropDownIsOpen(false);
+            document.documentElement.scrollTop = 0;
+          }}
+          loggedIn={loggedIn}
+        >
+          <BackToFeedButton>
+            <FiHome />
+          </BackToFeedButton>
+        </StyledLinkFeed>
+        <StyledLinkLogo to="/feed">
+          <Logo>
+            Robogram
+            <LogoImage src="bot-300x300.png" />
+          </Logo>
+        </StyledLinkLogo>
+        <MenuBox loggedIn={loggedIn}>
+          <AvatarDisplay
+            src={loggedUser.avatar}
+            onClick={() => setDropDownIsOpen(!dropDownIsOpen)}
+          />
+          <DropDown dropDownIsOpen={dropDownIsOpen}>
+            <ProfileDisplay>{`Hi ${loggedUser.userName}!`}</ProfileDisplay>
+            <StyledLink to="/profile" onClick={() => setDropDownIsOpen(false)}>
+              <ProfileButton>
+                <TextSpan>Your Profile</TextSpan> <FaUserAstronaut />
+              </ProfileButton>
+            </StyledLink>
+            <StyledLink to="/credits" onClick={() => setDropDownIsOpen(false)}>
+              <CreditsButton>
+                <TextSpan>Credits</TextSpan> <FaRegHandPeace />
+              </CreditsButton>
+            </StyledLink>
 
-          <LogOutButton
-            onClick={() => {
-              logout();
-            }}>
-            <TextSpan>Log Out </TextSpan>
-            <FiLogOut />
-          </LogOutButton>
-        </DropDown>
-      </MenuBox>
-    </HomeBarContainer>
+            <LogOutButton
+              onClick={() => {
+                logout();
+              }}
+            >
+              <TextSpan>Log Out </TextSpan>
+              <FiLogOut />
+            </LogOutButton>
+          </DropDown>
+        </MenuBox>
+      </HomeBarContainer>
+    </HomeBarSeparator>
   );
 };
 
 export default HomeBar;
 
-const HomeBarContainer = styled.div`
+const HomeBarSeparator = styled.div`
+  ${flexbox()}
+  width: 100vw;
+  height: 50px;
+  border-bottom: 1px solid lightslategrey;
   display: flex;
-  justify-content: ${({ loggedIn }) => (loggedIn ? "space-between" : "space-around")};
   position: fixed;
   top: 0;
+  z-index: 5;
+`;
+
+const HomeBarContainer = styled.div`
+${flexbox()}
+  justify-content: ${({ loggedIn }) =>
+    loggedIn ? "space-between" : "space-around"};
+  height: 100%;
   width: 100%;
   max-width: 450px;
-  height: 50px;
   background-color: white;
   text-align: center;
-  border-bottom: 1px solid lightslategrey;
-  z-index: 5;
 `;
 
 const StyledLinkFeed = styled(Link)`
@@ -85,10 +106,7 @@ const StyledLinkFeed = styled(Link)`
 `;
 
 const BackToFeedButton = styled.div`
-  position: absolute;
-  top: 8px;
-  left: 12px;
-  flex-basis: 20%;
+  flex-basis: 15%;
   color: black;
   font-size: 22px;
 
@@ -112,6 +130,10 @@ const Logo = styled.div`
   font-family: "Pacifico", cursive;
   font-size: 34px;
   flex-basis: 60%;
+
+  :hover {
+    filter: brightness(1.5);
+  }
 `;
 
 const LogoImage = styled.img`
@@ -121,19 +143,20 @@ const LogoImage = styled.img`
 
 const MenuBox = styled.div`
   display: ${({ loggedIn }) => (loggedIn ? "block" : "none")};
+  position: relative;
 `;
 
 const AvatarDisplay = styled.img`
-  position: absolute;
-  top: 6px;
-  right: 13px;
+  flex-basis: 15%;
   height: 40px;
-  width: 40px;
   border: 1px solid #313131;
   border-radius: 50%;
+  margin-top: 6px;
+  margin-right: 6px;
 
   &:hover {
     cursor: pointer;
+    filter: brightness(1.2);
   }
 `;
 
@@ -142,15 +165,15 @@ const DropDown = styled.ul`
   flex-wrap: wrap;
   display: ${({ dropDownIsOpen }) => (dropDownIsOpen ? "block" : "none")};
   position: absolute;
+  right: 2px;
+  top: 50px;
   background: white;
   border: 2px solid #313131;
   box-shadow: 2px 5px 5px black;
-  width: 50%;
-  height: 400%;
+  width: 250px;
+  height: 200px;
   border-radius: 4px;
-  right: 14px;
-  top: 60px;
-  z-index: 999;
+  z-index: 9;
 
   &:before {
     content: "";
@@ -162,7 +185,6 @@ const DropDown = styled.ul`
     height: 0px;
     width: 0px;
     top: -10px;
-    /* top: -7px; */
     right: 10px;
   }
 `;
@@ -201,7 +223,6 @@ const StyledLink = styled(Link)`
 
 const ProfileButton = styled.li`
   ${flexbox()}
-  /* border-bottom: 1px grey solid; */
   text-align: left;
   height: 25%;
   flex-basis: 100%;

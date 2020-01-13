@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { flexbox } from "./../styles/mixins";
 
 //importing Components
 import Login from "./Login";
@@ -26,7 +25,7 @@ const App = () => {
         <CloseDropDownDiv onClick={() => setDropDownIsOpen(false)}>
           <Switch>
             <Route exact path="/">
-              {loggedIn ? <Feed /> : <Credits />}
+              {loggedIn ? <Feed /> : <Login />}
             </Route>
             <Route path="/credits" component={Credits} />
             <Route path="/login" component={Login} />
@@ -45,12 +44,11 @@ const App = () => {
 export default App;
 
 const MainContainer = styled.div`
-  /* padding-top: 5vh; */
   user-select: none;
   display: flex;
-  /* justify-content: center; */
-  /* border: 3px solid red; */
+
   flex-direction: column;
+  align-items: center;
   margin: 50px auto 0;
   height: 100vh;
   position: relative;
@@ -60,11 +58,9 @@ const MainContainer = styled.div`
   max-width: 450px;
   background: white;
   font-family: "Hind Guntur", sans-serif;
-  /* overflow: hidden; */
-  /* overflow-y: scroll; */
-  /* overflow-x: hidden; */
 `;
 
 const CloseDropDownDiv = styled.div`
   height: 100%;
+  width: 100%;
 `;
